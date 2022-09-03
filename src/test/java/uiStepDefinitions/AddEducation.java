@@ -2,6 +2,8 @@ package uiStepDefinitions;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -15,27 +17,19 @@ public class AddEducation {
 	private WebDriver driver = DriverFactory.getInstance();
 
 	@Then("User updates {string}")
-	public void user_update_add_education(String string) throws InterruptedException {
-
+	public void user_updates(String string, io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+		Map<String, String> addEducation = dataTable.asMaps().get(0);
 		driver.findElement(By.linkText("Add Education")).click();
-		driver.findElement(By.name("school")).sendKeys("BoraTech");
-		driver.findElement(By.name("degree")).sendKeys("Test Automation Degree");
-		driver.findElement(By.name("fieldofstudy")).sendKeys("Test Automation");
-		driver.findElement(By.name("from")).sendKeys("05/07/2022");
-		driver.findElement(By.name("current")).click();
-		driver.findElement(By.tagName("textarea")).sendKeys("This is fun");
+		driver.findElement(By.name("school")).sendKeys(addEducation.get("school"));
+		driver.findElement(By.name("degree")).sendKeys(addEducation.get("degree"));
+		driver.findElement(By.name("fieldofstudy")).sendKeys(addEducation.get("fieldofstudy"));
+		driver.findElement(By.name("from")).sendKeys(addEducation.get("from date"));
+		if (!addEducation.get("current").equals(null)) {
+			driver.findElement(By.name("current")).click();
+		}
+		driver.findElement(By.tagName("textarea")).sendKeys(addEducation.get("description"));
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
 		Thread.sleep(1000);
-
-	}
-
-	@And("user should see the success alert for add education")
-	public void user_should_see_the_success_alert_works() {
-		try {
-			assertTrue(driver.findElement(By.cssSelector(".alert.alert-success")).isDisplayed());
-		} catch (NoSuchElementException e) {
-			assertTrue(false, "The success alert was not found");
-		}
 	}
 
 }

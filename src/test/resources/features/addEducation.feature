@@ -6,4 +6,6 @@ Feature: Add Education
       | username                     | password   |
       | yadikaeryashengdmv@gmail.com | yadang0306 |
     Then User updates "add education"
-    And the operation is successful
+      | school   | degree                 | fieldofstudy  | from date  | current | to   | description  |
+      | BoraTech | Test automation degree | Test Automation | 05/07/2022 | true    | null | This is fun! |
+    Then user should see the success alert
