@@ -1,19 +1,15 @@
 package uiStepDefinitions;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.*;
 import io.cucumber.java.en.*;
 import utilities.DriverFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.Duration;
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Login {
 
