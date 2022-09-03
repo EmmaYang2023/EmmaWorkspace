@@ -19,7 +19,7 @@ public class Posts {
 		driver.findElement(By.tagName("textarea")).sendKeys(comment.get("comment"));
 	}
 
-	@When("user clicks on the submit button")
+	@When("user submits the post")
 	public void user_clicks_on_the_submit_button() {
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
 	}

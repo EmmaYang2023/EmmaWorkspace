@@ -11,5 +11,5 @@ Feature: Posts
     When user enters the post comment
       | comment                                          |
       | Cucumber automation is a lot more than you think |
-    And user clicks on the submit button
+    And user submits the post
     Then user should see the success alert
