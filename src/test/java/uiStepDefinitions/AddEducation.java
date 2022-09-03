@@ -13,7 +13,7 @@ public class AddEducation {
 
 	private WebDriver driver = DriverFactory.getInstance();
 
-	@Then("User updates {string}")
+	@Then("User updates add education")
 	public void user_updates_add_education(DataTable dataTable) throws InterruptedException {
 		Map<String, String> addEducation = dataTable.asMaps().get(0);
 		driver.findElement(By.linkText("Add Education")).click();
