@@ -24,9 +24,14 @@ public class Profile {
 		Map<String, String> experience = dataTable.asMaps().get(0);
 		driver.findElement(By.xpath("//input[@placeholder='* Job Title']")).sendKeys(experience.get("jobtitle"));
 		driver.findElement(By.name("company")).sendKeys(experience.get("company"));
-		driver.findElement(By.name("location")).sendKeys(experience.get("company"));
+		driver.findElement(By.name("location")).sendKeys(experience.get("location"));
 		driver.findElement(By.name("from")).sendKeys(experience.get("from"));
-		driver.findElement(By.xpath("//input[@name='current']")).click();
+		if (experience.get("current").equals("true")) {
+			driver.findElement(By.xpath("//input[@name='current']")).click();
+		} else {
+			driver.findElement(By.xpath("//h1[contains(text(),'Add An')]/following-sibling::form//input[@name='to']"))
+					.sendKeys(experience.get("to"));
+		}
 		driver.findElement(By.xpath("//textarea[@name='description']")).sendKeys(experience.get("description"));
 	}
 }
