@@ -14,7 +14,7 @@ public class AddEducation {
 	private WebDriver driver = DriverFactory.getInstance();
 
 	@Then("User updates add education")
-	public void user_updates_add_education(DataTable dataTable) throws InterruptedException {
+	public void user_updates_add_education(DataTable dataTable) {
 		Map<String, String> addEducation = dataTable.asMaps().get(0);
 		driver.findElement(By.linkText("Add Education")).click();
 		driver.findElement(By.name("school")).sendKeys(addEducation.get("school"));
@@ -26,7 +26,7 @@ public class AddEducation {
 		}
 		driver.findElement(By.tagName("textarea")).sendKeys(addEducation.get("description"));
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
-		Thread.sleep(1000);
+
 	}
 
 }
