@@ -24,8 +24,6 @@ public class Common {
 	public void user_should_be_navigated_to_the_page(String pageTitle) {
 		String titleText = driver.findElement(By.cssSelector(".large.text-primary")).getText();
 		assertEquals(pageTitle, titleText);
-		String currentUrl = driver.getCurrentUrl();
-		assertTrue(currentUrl.contains(pageTitle.toLowerCase()));
 	}
 
 	@Then("user should see the success alert")
