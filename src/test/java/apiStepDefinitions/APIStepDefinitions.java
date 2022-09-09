@@ -2,6 +2,8 @@ package apiStepDefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
+import io.restassured.response.Response;
+import pojo.Education;
 import pojo.LoginRequestBody;
 import utilities.Utilities;
 
@@ -16,7 +18,9 @@ import api.BoraAPI;
 
 public class APIStepDefinitions {
 
-	public String token;
+	private String token;
+	private Education education;
+	private Response response;
 
 	@Given("[API] user is logged in")
 	public void apiLogin(List<LoginRequestBody> LoginRequestBodies) {
@@ -58,46 +62,25 @@ public class APIStepDefinitions {
 	}
 
 	@Then("[API] user adds an education")
-	public void api_user_adds_an_education(DataTable dataTable) {
-		Map<String, String> educationInput = dataTable.asMaps().get(0);
-		Map<String, Object> education = new HashMap<>();
-
-		for (Entry<String, String> entry : educationInput.entrySet()) {
-			if (entry.getKey().equals("current")) {
-				education.put(entry.getKey(), Boolean.getBoolean(entry.getValue()));
-			} else {
-				education.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		BoraAPI.addEducation(education, token);
+	public void api_user_adds_an_education(List<Education> educations) {
+		education = educations.get(0);
+		response = BoraAPI.addEducation(education, token);
 	}
 
-	@Then("[API] [ERROR] user adds an education")
-	public void api_error_user_adds_an_education(DataTable dataTable) {
-		Map<String, String> educationInput = dataTable.asMaps().get(0);
-		Map<String, Object> education = new HashMap<>();
+	@Then("[API] user should be able to validate the newly added education")
+	public void api_user_should_be_able_to_validate_the_newly_added_education() {
+		BoraAPI.addEducationHappyPathValidation(response, education);
+	}
 
-		String errors = educationInput.get("errors");
-		String[] expectedErrors = null;
-		if (errors != null && !errors.isEmpty()) {
-			expectedErrors = errors.split(",");
-			for (int i = 0; i < expectedErrors.length; i++) {
-				expectedErrors[i] = expectedErrors[i].trim();
-			}
+	@Then("[API] user should receive the expected error messages")
+	public void api_user_should_receive_the_expected_error_messages(DataTable dataTable) {
+		Map<String, String> input = dataTable.asMaps().get(0);
+		String errors = input.get("errors");
+		String[] expectedErrors = errors.split(",");
+		for (int i = 0; i < expectedErrors.length; i++) {
+			expectedErrors[i] = expectedErrors[i].trim();
 		}
-
-		for (Entry<String, String> entry : educationInput.entrySet()) {
-			if (entry.getKey().equals("current")) {
-				education.put(entry.getKey(), Boolean.getBoolean(entry.getValue()));
-			} else if (entry.getKey().equals("errors")) {
-				continue;
-			} else {
-				education.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		BoraAPI.addEducationErrorScenario(education, token, expectedErrors);
+		BoraAPI.addEducationErrorPathValidation(response, expectedErrors);
 	}
 
 }

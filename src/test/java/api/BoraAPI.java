@@ -8,6 +8,7 @@ import java.util.Map;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import pojo.Education;
 import pojo.LoginRequestBody;
 
 public class BoraAPI {
@@ -25,7 +26,7 @@ public class BoraAPI {
 		int actualStatusCode = response.getStatusCode();
 		int expectedStatusCode = 200;
 
-		assertEquals(actualStatusCode, expectedStatusCode);
+		assertEquals(expectedStatusCode, actualStatusCode);
 
 		String token = response.jsonPath().get("token");
 
@@ -73,7 +74,7 @@ public class BoraAPI {
 
 	}
 
-	public static void addEducation(Map<String, Object> education, String token) {
+	public static Response addEducation(Education education, String token) {
 		RestAssured.baseURI = "https://boratech.herokuapp.com";
 		String endpoint = "/api/profile/education";
 		RequestSpecification request = RestAssured.given();
@@ -84,6 +85,10 @@ public class BoraAPI {
 		request.body(education);
 
 		Response response = request.put(endpoint);
+		return response;
+	}
+
+	public static void addEducationHappyPathValidation(Response response, Education expectedEducation) {
 		int actualStatusCode = response.getStatusCode();
 		int expectedStatusCode = 200;
 		assertEquals(expectedStatusCode, actualStatusCode);
@@ -91,7 +96,7 @@ public class BoraAPI {
 		ArrayList<Map<String, Object>> educations = response.jsonPath().get("education");
 		boolean found = false;
 		for (Map<String, Object> edu : educations) {
-			if (edu.get("school").equals(education.get("school"))) {
+			if (edu.get("school").equals(expectedEducation.school)) {
 				found = true;
 			}
 		}
@@ -99,17 +104,7 @@ public class BoraAPI {
 		assertTrue(found, "The newly added education was not found ");
 	}
 
-	public static void addEducationErrorScenario(Map<String, Object> education, String token, String[] expectedErrors) {
-		RestAssured.baseURI = "https://boratech.herokuapp.com";
-		String endpoint = "/api/profile/education";
-		RequestSpecification request = RestAssured.given();
-
-		request.header("Content-Type", "application/json");
-		request.header("x-auth-token", token);
-
-		request.body(education);
-
-		Response response = request.put(endpoint);
+	public static void addEducationErrorPathValidation(Response response, String[] expectedErrors) {
 		int actualStatusCode = response.getStatusCode();
 		int expectedStatusCode = 400;
 		assertEquals(expectedStatusCode, actualStatusCode);

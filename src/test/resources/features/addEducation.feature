@@ -17,20 +17,24 @@ Feature: Add Education
   @smoke @regression @api
   Scenario: Add a new education with API
     Given [API] user is logged in
-      | username                         | password |
+      | email                            | password |
       | muradil.erkin@boratechschool.com | Boratech |
-    Then [API] user adds an education
+    When [API] user adds an education
       | school   | degree                 | fieldofstudy    | from       | current | to | description  |
       | BoraTech | Test automation degree | Test Automation | 2022/05/07 | true    |    | This is fun! |
+    Then [API] user should be able to validate the newly added education
 
   @regression @api
   Scenario Outline: Add a new education with API - Error Path
     Given [API] user is logged in
-      | username                         | password |
+      | email                            | password |
       | muradil.erkin@boratechschool.com | Boratech |
-    Then [API] [ERROR] user adds an education
-      | school   | degree   | fieldofstudy   | from   | current   | to   | description   | errors   |
-      | <school> | <degree> | <fieldofstudy> | <from> | <current> | <to> | <description> | <errors> |
+    When [API] user adds an education
+      | school   | degree   | fieldofstudy   | from   | current   | to   | description   |
+      | <school> | <degree> | <fieldofstudy> | <from> | <current> | <to> | <description> |
+    Then [API] user should receive the expected error messages
+      | errors   |
+      | <errors> |
 
     Examples: 
       | school | degree                 | fieldofstudy    | from       | current | to | description  | errors                                                                                    |
