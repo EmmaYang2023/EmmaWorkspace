@@ -23,5 +23,5 @@ Feature: BoraTech Login
   @smoke @regression @api
   Scenario: API Login
     Given [API] user is logged in
-      | username                         | password |
+      | email                            | password |
       | muradil.erkin@boratechschool.com | Boratech |

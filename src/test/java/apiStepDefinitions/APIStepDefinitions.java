@@ -2,13 +2,13 @@ package apiStepDefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
+import pojo.LoginRequestBody;
 import utilities.Utilities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -19,10 +19,9 @@ public class APIStepDefinitions {
 	public String token;
 
 	@Given("[API] user is logged in")
-	public void apiLogin(DataTable dataTable) {
-		Map<String, String> credential = dataTable.asMaps().get(0);
-		token = BoraAPI.login(credential.get("username"), credential.get("password"));
-		System.out.println("Token: " + token);
+	public void apiLogin(List<LoginRequestBody> LoginRequestBodies) {
+		LoginRequestBody body = LoginRequestBodies.get(0);
+		token = BoraAPI.login(body);
 	}
 
 	@Then("[API] user adds an experience")
