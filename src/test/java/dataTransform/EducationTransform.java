@@ -6,6 +6,7 @@ import io.cucumber.java.DataTableType;
 import pojo.Education;
 
 public class EducationTransform {
+
 	@DataTableType
 	public Education educationConvert(Map<String, String> entry) {
 		Education education = new Education(Boolean.valueOf(entry.get("current")), entry.get("_id"),
@@ -13,4 +14,5 @@ public class EducationTransform {
 				entry.get("description"));
 		return education;
 	}
+
 }
