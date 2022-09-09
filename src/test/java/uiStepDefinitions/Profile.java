@@ -1,13 +1,16 @@
 package uiStepDefinitions;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Transpose;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pojo.Experience;
 import utilities.DriverFactory;
 
 public class Profile {
@@ -23,19 +26,20 @@ public class Profile {
 	}
 
 	@When("user adds an experience")
-	public void user_enters_experiences(io.cucumber.datatable.DataTable dataTable) {
-		Map<String, String> experience = dataTable.asMaps().get(0);
-		driver.findElement(By.xpath("//input[@placeholder='* Job Title']")).sendKeys(experience.get("jobtitle"));
-		driver.findElement(By.name("company")).sendKeys(experience.get("company"));
-		driver.findElement(By.name("location")).sendKeys(experience.get("location"));
-		driver.findElement(By.name("from")).sendKeys(experience.get("from"));
-		if (experience.get("current").equals("true")) {
-			driver.findElement(By.xpath("//input[@name='current']")).click();
-		} else {
-			driver.findElement(By.name("to")).sendKeys(experience.get("to"));
+	public void user_enters_experiences(List<Experience> experiences) {
+		for (Experience experience : experiences) {
+			driver.findElement(By.xpath("//input[@placeholder='* Job Title']")).sendKeys(experience.title);
+			driver.findElement(By.name("company")).sendKeys(experience.company);
+			driver.findElement(By.name("location")).sendKeys(experience.location);
+			driver.findElement(By.name("from")).sendKeys(experience.from);
+			if (experience.current) {
+				driver.findElement(By.xpath("//input[@name='current']")).click();
+			} else {
+				driver.findElement(By.name("to")).sendKeys(experience.to);
+			}
+			driver.findElement(By.xpath("//textarea[@name='description']")).sendKeys(experience.description);
+			driver.findElement(By.xpath("//input[@type='submit']")).click();
 		}
-		driver.findElement(By.xpath("//textarea[@name='description']")).sendKeys(experience.get("description"));
-		driver.findElement(By.xpath("//input[@type='submit']")).click();
 	}
 
 	@Then("user adds an education")
