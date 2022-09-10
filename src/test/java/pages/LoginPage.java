@@ -12,7 +12,7 @@ public class LoginPage {
 	// Local variables
 	private WebDriver driver;
 
-	private static final String url = "https://boratech.herokuapp.com/login";
+	private static final String URL = "https://boratech.herokuapp.com/login";
 
 	// Elements
 	@FindBy(xpath = "//input[@name='email']")
@@ -23,8 +23,6 @@ public class LoginPage {
 
 	@FindBy(xpath = "//input[@value='Login']")
 	private WebElement loginSubmitButton;
-	@FindBy(linkText = "Login")
-	private WebElement loginButton;
 
 	// Constructor
 	public LoginPage(WebDriver driver) {
@@ -36,7 +34,6 @@ public class LoginPage {
 
 	public void navigate() {
 		driver.get(url);
-
 	}
 
 	public void enterEmailAndPassword(String email, String password) {
