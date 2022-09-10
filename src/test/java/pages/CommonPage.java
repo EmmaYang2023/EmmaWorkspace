@@ -13,6 +13,7 @@ public class CommonPage {
 
 	@FindBy(css = ".large.text-primary")
 	private WebElement titleTextElement;
+
 	@FindBy(css = ".alert.alert-success")
 	private WebElement successAlert;
 

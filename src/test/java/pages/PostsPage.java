@@ -10,6 +10,7 @@ public class PostsPage {
 
 	@FindBy(tagName = "textarea")
 	private WebElement textAreaField;
+	
 	@FindBy(xpath = "//input[@type='submit']")
 	private WebElement postSubmitButton;
 
