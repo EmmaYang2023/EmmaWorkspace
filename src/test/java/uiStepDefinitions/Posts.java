@@ -1,27 +1,24 @@
 package uiStepDefinitions;
 
 import java.util.Map;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.When;
-import utilities.DriverFactory;
+import utilities.PageManager;
 
 public class Posts {
 
-	private WebDriver driver = DriverFactory.getInstance();
+	private PageManager pages = PageManager.getInstance();
 
 	@When("user enters the post comment")
 	public void user_enters_the_post_comment(DataTable dataTable) {
-		Map<String, String> comment = dataTable.asMaps().get(0);
-		driver.findElement(By.tagName("textarea")).sendKeys(comment.get("comment"));
+		Map<String, String> commentData = dataTable.asMaps().get(0);
+		String comment = commentData.get("comment");
+		pages.getPostsPage().enterPostComment(comment);
 	}
 
 	@When("user submits the post")
 	public void user_clicks_on_the_submit_button() {
-		driver.findElement(By.xpath("//input[@type='submit']")).click();
+		pages.getPostsPage().submitPost();
 	}
 
 }
