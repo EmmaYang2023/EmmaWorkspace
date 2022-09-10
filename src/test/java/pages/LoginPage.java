@@ -11,7 +11,6 @@ public class LoginPage {
 
 	// Local variables
 	private WebDriver driver;
-
 	private static final String URL = "https://boratech.herokuapp.com/login";
 
 	// Elements
@@ -31,9 +30,8 @@ public class LoginPage {
 	}
 
 	// Actions
-
 	public void navigate() {
-		driver.get(url);
+		driver.get(URL);
 	}
 
 	public void enterEmailAndPassword(String email, String password) {
