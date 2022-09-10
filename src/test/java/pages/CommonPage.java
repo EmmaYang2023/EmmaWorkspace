@@ -21,7 +21,7 @@ public class CommonPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void validatePageLoad(String pageTitle) {
+	public void validatePageTitle(String pageTitle) {
 		String titleText = titleTextElement.getText();
 		assertEquals(pageTitle, titleText);
 	}

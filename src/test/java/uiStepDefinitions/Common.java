@@ -14,7 +14,7 @@ public class Common {
 
 	@Then("user should be navigated to the {string} page")
 	public void user_should_be_navigated_to_the_page(String pageTitle) {
-		pages.getCommonPage().validatePageLoad(pageTitle);
+		pages.getCommonPage().validatePageTitle(pageTitle);
 	}
 
 	@Then("user should see the success alert")
