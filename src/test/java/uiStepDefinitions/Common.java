@@ -9,12 +9,12 @@ public class Common {
 
 	@When("user clicks on the {string} navigation link")
 	public void user_clicks_on_the_navigation_link(String navigationLinkText) {
-		pages.getNavBar().clickOnLink(navigationLinkText);
+		pages.getNavBar().clickOnLinkByLinkText(navigationLinkText);
 	}
 
 	@Then("user should be navigated to the {string} page")
 	public void user_should_be_navigated_to_the_page(String pageTitle) {
-		pages.getPostsPage().validatePostPageLost(pageTitle);
+		pages.getCommonPage().validatePageLoad(pageTitle);
 	}
 
 	@Then("user should see the success alert")

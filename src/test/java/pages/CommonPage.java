@@ -10,13 +10,20 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CommonPage {
 	private WebDriver driver;
-	
+
+	@FindBy(css = ".large.text-primary")
+	private WebElement titleTextElement;
 	@FindBy(css = ".alert.alert-success")
 	private WebElement successAlert;
-	
+
 	public CommonPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+	}
+
+	public void validatePageLoad(String pageTitle) {
+		String titleText = titleTextElement.getText();
+		assertEquals(pageTitle, titleText);
 	}
 
 	public void validateSuccessAlert() {

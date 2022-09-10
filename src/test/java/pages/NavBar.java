@@ -13,7 +13,7 @@ public class NavBar {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void clickOnLink(String navigationLinkText) {
+	public void clickOnLinkByLinkText(String navigationLinkText) {
 		driver.findElement(By.linkText(navigationLinkText)).click();
 	}
 
