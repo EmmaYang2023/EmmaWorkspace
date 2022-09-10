@@ -23,13 +23,10 @@ public class PageManager {
 		return pageManager;
 	}
 
-<<<<<<< Updated upstream
-=======
 	public static void cleanup() {
 		pageManager = null;
 	}
 
->>>>>>> Stashed changes
 	private PageManager(WebDriver driver) {
 		this.driver = driver;
 	}
