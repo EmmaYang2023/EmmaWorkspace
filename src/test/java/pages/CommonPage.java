@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CommonPage {
+
 	private WebDriver driver;
 
 	@FindBy(css = ".large.text-primary")
@@ -22,9 +23,9 @@ public class CommonPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void validatePageTitle(String pageTitle) {
-		String titleText = titleTextElement.getText();
-		assertEquals(pageTitle, titleText);
+	public void validatePageTitle(String expectedPageTitle) {
+		String actualPageTitle = titleTextElement.getText();
+		assertEquals(expectedPageTitle, actualPageTitle);
 	}
 
 	public void validateSuccessAlert() {
