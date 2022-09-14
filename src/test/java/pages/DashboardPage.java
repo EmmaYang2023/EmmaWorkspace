@@ -2,6 +2,8 @@ package pages;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +21,9 @@ public class DashboardPage {
 	@FindBy(xpath = "//p[@class='lead']")
 	private WebElement subtitleText;
 
+	@FindBy(xpath = "//table[2]/tbody/tr")
+	private List<WebElement> educationTableRows;
+
 	// Constructor
 	public DashboardPage(WebDriver driver) {
 		this.driver = driver;
@@ -33,6 +38,18 @@ public class DashboardPage {
 	public void clickAddExperienceOrAddEducationButton(String target) {
 		driver.findElement(By.xpath("//*[contains(text(), " + target + ")]")).click();
 		Utilities.wait(2);
+	}
+
+	public void validateEducationExists(String school, String degree) {
+		boolean found = false;
+		for (WebElement educationTableRow : educationTableRows) {
+			String rowText = educationTableRow.getText();
+			if (rowText.contains(school) && rowText.contains(degree)) {
+				found = true;
+				break;
+			}
+		}
+		assertTrue(found, "Education expected was not found");
 	}
 
 }
