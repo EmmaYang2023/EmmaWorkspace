@@ -6,11 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class PostsPage {
+
 	private WebDriver driver;
 
 	@FindBy(tagName = "textarea")
-	private WebElement textAreaField;
-	
+	private WebElement commentField;
+
 	@FindBy(xpath = "//input[@type='submit']")
 	private WebElement postSubmitButton;
 
@@ -20,7 +21,7 @@ public class PostsPage {
 	}
 
 	public void enterPostComment(String comment) {
-		textAreaField.sendKeys(comment);
+		commentField.sendKeys(comment);
 	}
 
 	public void submitPost() {
