@@ -44,4 +44,10 @@ public class LoginPage {
 		Utilities.wait(2);
 	}
 
+	public void userIsLoggedIn(String email, String password) {
+		this.navigate();
+		this.enterEmailAndPassword(email, password);
+		this.submitLogin();
+	}
+
 }

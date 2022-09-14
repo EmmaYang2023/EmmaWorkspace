@@ -29,9 +29,7 @@ public class Login {
 	@Given("user is logged in")
 	public void user_is_logged_in(DataTable dataTable) {
 		Map<String, String> credential = dataTable.asMaps().get(0);
-		pages.getLoginPage().navigate();
-		pages.getLoginPage().enterEmailAndPassword(credential.get("username"), credential.get("password"));
-		pages.getLoginPage().submitLogin();
+		pages.getLoginPage().userIsLoggedIn(credential.get("username"), credential.get("password"));
 		pages.getDashboardPage().validatePageLoad();
 	}
 }
