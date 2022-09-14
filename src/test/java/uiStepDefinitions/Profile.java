@@ -1,7 +1,9 @@
 package uiStepDefinitions;
 
 import java.util.List;
+import java.util.Map;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import pojo.*;
 import utilities.PageManager;
@@ -28,4 +30,11 @@ public class Profile {
 			pages.getAddEducationPage().addEducation(education);
 		}
 	}
+
+	@Then("user should see the newly added education crendential")
+	public void user_should_see_the_newly_added_education_crendential(DataTable dataTable) {
+		Map<String, String> educationAdded = dataTable.asMaps().get(0);
+		pages.getDashboardPage().validateEducationExists(educationAdded.get("school"), educationAdded.get("degree"));
+	}
+
 }
