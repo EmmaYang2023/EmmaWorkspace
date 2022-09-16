@@ -4,7 +4,7 @@ Feature: Posts
   @smoke @regression @ui
   Scenario: Create Post
     Given user is logged in
-      | username                         | password |
+      | email                            | password |
       | muradil.erkin@boratechschool.com | Boratech |
     When user clicks on the "Posts" navigation link
     Then user should be navigated to the "Posts" page

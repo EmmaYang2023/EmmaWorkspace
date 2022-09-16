@@ -17,6 +17,7 @@ public class PageManager {
 	private CommonPage commonPage;
 	private AddExperiencePage addExperiencePage;
 	private AddEducationPage addEducationPage;
+	private EditProfilePage editProfilePage;
 
 	public static PageManager getInstance() {
 		if (pageManager == null) {
@@ -87,6 +88,13 @@ public class PageManager {
 			this.addEducationPage = new AddEducationPage(driver);
 		}
 		return this.addEducationPage;
+	}
+	
+	public EditProfilePage getEditProfilePage() {
+		if (editProfilePage == null) {
+			this.editProfilePage = new EditProfilePage(driver);
+		}
+		return this.editProfilePage;
 	}
 
 }

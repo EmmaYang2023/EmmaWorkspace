@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import pojo.Education;
 import pojo.LoginRequestBody;
+import pojo.ProfileRequestBody;
 
 public class BoraAPI {
 
@@ -33,6 +34,20 @@ public class BoraAPI {
 		assertNotNull(token);
 		assertTrue(token != "");
 		return token;
+	}
+
+	public static Response createOrUpdateProfile(ProfileRequestBody profileRequestBody, String token) {
+		RestAssured.baseURI = "https://boratech.herokuapp.com";
+		String endpoint = "/api/profile";
+		RequestSpecification request = RestAssured.given();
+
+		request.header("Content-Type", "application/json");
+		request.header("x-auth-token", token);
+
+		request.body(profileRequestBody);
+
+		Response response = request.post(endpoint);
+		return response;
 	}
 
 	public static void addExperience(Map<String, Object> experience, String token, String[] expectedErrors) {
