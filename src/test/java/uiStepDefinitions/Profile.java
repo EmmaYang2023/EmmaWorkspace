@@ -3,6 +3,8 @@ package uiStepDefinitions;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.WebDriver;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import pojo.*;
@@ -35,6 +37,13 @@ public class Profile {
 	public void user_should_see_the_newly_added_education_crendential(DataTable dataTable) {
 		Map<String, String> educationAdded = dataTable.asMaps().get(0);
 		pages.getDashboardPage().validateEducationExists(educationAdded.get("school"), educationAdded.get("degree"));
+	}
+	
+	@When("user creates\\/updates the profile")
+	public void user_creates_updates_the_profile(DataTable dataTable) {
+		Map<String, String> data = dataTable.asMap();
+		pages.getDashboardPage().clickOnEditProfile();
+		pages.getEditProfilePage().enterProfileData(data);
 	}
 
 }

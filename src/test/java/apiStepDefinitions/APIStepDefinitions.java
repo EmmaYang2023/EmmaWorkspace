@@ -1,10 +1,12 @@
 package apiStepDefinitions;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Transpose;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 import pojo.Education;
 import pojo.LoginRequestBody;
+import pojo.ProfileRequestBody;
 import utilities.Utilities;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -81,6 +83,16 @@ public class APIStepDefinitions {
 			expectedErrors[i] = expectedErrors[i].trim();
 		}
 		BoraAPI.addEducationErrorPathValidation(response, expectedErrors);
+	}
+
+	@When("[API] user creates\\/updates the profile")
+	public void api_user_creates_updates_the_profile(@Transpose ProfileRequestBody profileRequestBody) {
+		response = BoraAPI.createOrUpdateProfile(profileRequestBody, token);
+	}
+
+	@Then("[API] user should receive the created\\/updated profile")
+	public void api_user_should_receive_the_created_updated_profile() {
+		assertEquals(200, response.getStatusCode());
 	}
 
 }

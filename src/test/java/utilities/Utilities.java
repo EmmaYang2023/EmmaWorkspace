@@ -1,5 +1,7 @@
 package utilities;
 
+import org.openqa.selenium.WebElement;
+
 public class Utilities {
 
 	public static int generateRandomNumbers() {
@@ -12,6 +14,11 @@ public class Utilities {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void clearAndEnter(WebElement element, String dataToEnter) {
+		element.clear();
+		element.sendKeys(dataToEnter);
 	}
 
 }

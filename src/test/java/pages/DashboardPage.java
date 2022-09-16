@@ -24,6 +24,9 @@ public class DashboardPage {
 	@FindBy(xpath = "//table[2]/tbody/tr")
 	private List<WebElement> educationTableRows;
 
+	@FindBy(xpath = "//a[@href='/edit-profile']")
+	private WebElement editProfileLink;
+
 	// Constructor
 	public DashboardPage(WebDriver driver) {
 		this.driver = driver;
@@ -50,6 +53,10 @@ public class DashboardPage {
 			}
 		}
 		assertTrue(found, "Education expected was not found");
+	}
+
+	public void clickOnEditProfile() {
+		editProfileLink.click();
 	}
 
 }
