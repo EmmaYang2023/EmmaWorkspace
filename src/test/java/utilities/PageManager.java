@@ -27,7 +27,6 @@ public class PageManager {
 	}
 
 	
-
 	public static void cleanup() {
 		pageManager = null;
 	}
