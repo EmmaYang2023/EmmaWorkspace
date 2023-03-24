@@ -18,7 +18,7 @@ public class Login {
 
 	@When("user enters username - {string} and password - {string}")
 	public void user_enters_username_and_password(String username, String password) {
-		pages.getLoginPage().enterEmailAndPassword(username, password);
+		pages.getLoginPage().enterUserNameAndPassword(username, password);
 	}
 
 	@When("user clicks on the login button")

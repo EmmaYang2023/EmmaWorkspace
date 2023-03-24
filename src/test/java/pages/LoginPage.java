@@ -11,17 +11,17 @@ public class LoginPage {
 
 	// Local variables
 	private WebDriver driver;
-	private static final String URL = "https://boratech.herokuapp.com/login";
+	private static final String URL = "https://sercona-test.serco.cms/";
 
 	// Elements
-	@FindBy(xpath = "//input[@name='email']")
-	private WebElement emailField;
+	@FindBy(xpath = "//usernameXpath")
+	private WebElement userNameField;
 
 	@FindBy(xpath = "//input[@name='password']")
 	private WebElement passwordField;
 
 	@FindBy(xpath = "//input[@value='Login']")
-	private WebElement loginSubmitButton;
+	private WebElement signInSubmitButton;
 
 	// Constructor
 	public LoginPage(WebDriver driver) {
@@ -34,19 +34,18 @@ public class LoginPage {
 		driver.get(URL);
 	}
 
-	public void enterEmailAndPassword(String email, String password) {
-		emailField.sendKeys(email);
+	public void enterUserNameAndPassword(String userName, String password) {
+		userNameField.sendKeys(userName);
 		passwordField.sendKeys(password);
 	}
 
 	public void submitLogin() {
-		loginSubmitButton.click();
-		Utilities.wait(2);
+		signInSubmitButton.click();
 	}
 
 	public void userIsLoggedIn(String email, String password) {
 		this.navigate();
-		this.enterEmailAndPassword(email, password);
+		this.enterUserNameAndPassword(email, password);
 		this.submitLogin();
 	}
 
