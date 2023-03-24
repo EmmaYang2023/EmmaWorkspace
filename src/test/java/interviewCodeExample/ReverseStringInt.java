@@ -20,7 +20,7 @@ public class ReverseStringInt {
 //		FibonaciiSequence(10);
 //		checkPrimeNumber(17);
 		int[] numbers = { 2, 23, 18, 47, 1, 42, 23, 21, 27, 73, 49, 81, 22, 31, 54 };
-
+		
 //		sortArrayByBubbleSort(numbers);
 		sortArrayBySelectionSort(numbers);
 
